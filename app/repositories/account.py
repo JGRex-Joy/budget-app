@@ -18,7 +18,7 @@ class AccountRepository:
     def get_all(self, user_id: int) -> List[Account]:
         return self.db.query(Account).filter(Account.user_id == user_id).all()
     
-    def create_account(self, user_id: int, account: AccountCreate) -> Account:
+    def create(self, user_id: int, account: AccountCreate) -> Account:
         db_account = Account(
             user_id = user_id,
             name = account.name,
@@ -32,7 +32,7 @@ class AccountRepository:
         self.db.refresh(db_account)
         return db_account
     
-    def update_account(self, account_id: id, user_id: int, account_update: AccountUpdate) -> Optional[Account]:
+    def update(self, account_id: id, user_id: int, account_update: AccountUpdate) -> Optional[Account]:
         db_account = self.get_by_id(account_id, user_id)
         if not db_account:
             return None
@@ -61,7 +61,7 @@ class AccountRepository:
         
         return True
     
-    def update_balance_account(self, account_id: int, amount: float) -> Optional[Account]:
+    def update_balance(self, account_id: int, amount: float) -> Optional[Account]:
         db_account = self.db.query(Account).filter(Account.id == account_id).first()
         if not db_account:
             return None

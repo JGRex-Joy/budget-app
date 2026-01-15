@@ -19,7 +19,7 @@ class AccountUpdate(BaseModel):
     currency: Optional[str] = None
     icon: Optional[str] = None
     
-class AccointResponse(AccountBase):
+class AccountResponse(AccountBase):
     id: int
     user_id: int
     balance: float

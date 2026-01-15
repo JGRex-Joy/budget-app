@@ -11,18 +11,19 @@ from app.core.database import get_db
 from app.repositories.user import UserRepository
 from app.schemas.user import TokenData
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 security = HTTPBearer()
+
 
 class AuthService:
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
         return pwd_context.verify(plain_password, hashed_password)
-    
+
     @staticmethod
     def get_password_hash(password: str) -> str:
         return pwd_context.hash(password)
-    
+
     @staticmethod
     def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
         to_encode = data.copy()
@@ -33,7 +34,7 @@ class AuthService:
         to_encode.update({"exp": expire})
         encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
         return encoded_jwt
-    
+
     @staticmethod
     def decode_token(token: str) -> TokenData:
         try:
@@ -44,12 +45,13 @@ class AuthService:
                     status_code=status.HTTP_401_UNAUTHORIZED,
                     detail="Could not validate credentials"
                 )
-                return TokenData(user_id=int(user_id))
+            return TokenData(user_id=int(user_id))
         except JWTError:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Could not validate credentials"
             )
+
 
 async def get_current_user_id(
     credentials: HTTPAuthorizationCredentials = Depends(security),
@@ -58,13 +60,11 @@ async def get_current_user_id(
     token = credentials.credentials
     token_data = AuthService.decode_token(token)
     
-    user_repo  = UserRepository(db)
+    user_repo = UserRepository(db)
     user = user_repo.get_by_id(token_data.user_id)
-    
-    if user in None:
+    if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User not found"
         )
-        
     return user.id
