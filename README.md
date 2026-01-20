@@ -1,0 +1,1 @@
+*Backend of Budget App built on FastAPI. There are few routes, it does work only on Bismillah and something."
