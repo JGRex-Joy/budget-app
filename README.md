@@ -1,1 +1,1 @@
-*Backend of Budget App built on FastAPI. There are few routes, it does work only on Bismillah and something."
+*Backend of Budget App built on FastAPI. There are few routes, it does work only on Bismillah and something. I made a clean architecture referencing to one tutorial I watched on youtube. I divided project into core, models, repositories, routes, schemas, services."
