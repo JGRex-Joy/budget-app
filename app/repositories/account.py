@@ -57,7 +57,6 @@ class AccountRepository:
         
         self.db.delete(db_account)
         self.db.commit()
-        self.db.refresh()
         
         return True
     
