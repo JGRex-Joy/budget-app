@@ -59,7 +59,7 @@ def update_account(
     return service.update_account(account_id, current_user_id, account_update)
 
 
-@router.delete("/{account_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{account_id}")
 def delete_account(
     account_id: int,
     current_user_id: int = Depends(get_current_user_id),

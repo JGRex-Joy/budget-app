@@ -9,7 +9,7 @@ from app.services.auth import get_current_user_id
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/users/me", response_model=UserResponse)
+@router.get("/me", response_model=UserResponse)
 def get_current_user(
     current_user_id: int = Depends(get_current_user_id),
     db: Session = Depends(get_db)
@@ -18,7 +18,7 @@ def get_current_user(
     return service.get_user(current_user_id)
 
 
-@router.put("users/me", response_model=UserResponse)
+@router.put("/me", response_model=UserResponse)
 def update_current_user(
     user_update: UserUpdate,
     current_user_id: int = Depends(get_current_user_id),
@@ -28,7 +28,7 @@ def update_current_user(
     return service.update_user(current_user_id, user_update)
 
 
-@router.delete("users/me", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/me", status_code=status.HTTP_204_NO_CONTENT)
 def delete_current_user(
     current_user_id: int = Depends(get_current_user_id),
     db: Session = Depends(get_db)
