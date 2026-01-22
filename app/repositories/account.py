@@ -68,5 +68,5 @@ class AccountRepository:
         
         db_account.balance += amount
         self.db.commit()
-        self.db.refresh(db_account)
+        self.db.refresh()
         return db_account
