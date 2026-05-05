@@ -1,6 +1,6 @@
 # Budget App 💰
 
-A modern full-stack budget management application built with FastAPI and React. Track your income, expenses, and manage multiple accounts with an intuitive mobile-first interface.
+A modern full-stack budget management application built with FastAPI. Track your income, expenses, and manage multiple accounts with an intuitive mobile-first interface.
 
 ## 🌟 Features
 
