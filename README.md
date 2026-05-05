@@ -1,7 +1,5 @@
 # Budget App 💰
 
-### **🔗[Live Demo](https://jgrex-joy.github.io/budget-app-frontend/)** | **🎨 [Frontend](https://github.com/JGRex-Joy/budget-app-frontend)** | **📦[Backend](https://github.com/JGRex-Joy/budget-app-backend)**
-
 A modern full-stack budget management application built with FastAPI and React. Track your income, expenses, and manage multiple accounts with an intuitive mobile-first interface.
 
 ## 🌟 Features
